@@ -1,3 +1,5 @@
+
+
 const items = [
   { id: "item1", title: "Fiets", image: "https://picsum.photos/seed/fiets/300/200" },
   { id: "item2", title: "Laptop", image: "https://picsum.photos/seed/laptop/300/200" },
