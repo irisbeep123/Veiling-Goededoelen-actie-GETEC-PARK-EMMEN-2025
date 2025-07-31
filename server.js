@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 require("./db"); // MongoDB connectie
-const Bid = require("./models/Bid"); // Bid model uit Mongoose
+const Bid = require("Veiling Goededoelen actie GETEC PARK EMMEN 2025/models/Bid"); // Bid model uit Mongoose
 
 const app = express();
 const PORT = process.env.PORT || 3000;
