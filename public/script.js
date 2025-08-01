@@ -62,3 +62,60 @@ async function submitBid(itemId) {
 }
 
 renderItems(); // laadt de items bij opstart
+document.getElementById("mijnFormulier").addEventListener("submit", async function (e) {
+  e.preventDefault(); // voorkomt standaard reload
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const response = await fetch("/api/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.ok) {
+      // ✅ Succes: toon popup
+      alert("Gegevens succesvol verstuurd!");
+      this.reset(); // formulier leegmaken
+    } else {
+      // ❌ Fout: geef melding
+      alert("Er ging iets mis bij het versturen van de gegevens.");
+    }
+  } catch (error) {
+    alert("Fout tijdens verzenden: " + error.message);
+  }
+});
+
+const mijnFormulier = document.getElementById("mijnFormulier");
+
+if (mijnFormulier) {
+  mijnFormulier.addEventListener("submit", async function (e) {
+    e.preventDefault(); // voorkomt herladen
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch("/api/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        alert("✅ Gegevens succesvol verstuurd!");
+        this.reset(); // formulier leegmaken
+      } else {
+        alert("❌ Er ging iets mis bij het versturen van de gegevens.");
+      }
+    } catch (error) {
+      alert("❌ Fout tijdens verzenden: " + error.message);
+    }
+  });
+}
