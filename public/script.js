@@ -56,40 +56,25 @@ async function submitBid(itemId) {
   });
 
   const data = await res.json();
+
+  if (res.ok) {
+    alert("✅ Bod succesvol geplaatst!");
+    // Velden leegmaken
+    document.getElementById(`bid-${itemId}`).value = "";
+    document.getElementById(`name-${itemId}`).value = "";
+    document.getElementById(`email-${itemId}`).value = "";
+  } else {
+    alert("❌ Fout bij plaatsen bod: " + data.message);
+  }
+
   document.getElementById(`status-${itemId}`).innerText = data.message;
 
-  renderItems(); // update de lijst
+  renderItems(); // update biedingen
 }
 
-renderItems(); // laadt de items bij opstart
-document.getElementById("mijnFormulier").addEventListener("submit", async function (e) {
-  e.preventDefault(); // voorkomt standaard reload
+renderItems(); // items direct laden bij opstart
 
-  const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
-
-  try {
-    const response = await fetch("/api/submit", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      // ✅ Succes: toon popup
-      alert("Gegevens succesvol verstuurd!");
-      this.reset(); // formulier leegmaken
-    } else {
-      // ❌ Fout: geef melding
-      alert("Er ging iets mis bij het versturen van de gegevens.");
-    }
-  } catch (error) {
-    alert("Fout tijdens verzenden: " + error.message);
-  }
-});
-
+// Je formulier event listener (indien je een formulier met id "mijnFormulier" hebt)
 const mijnFormulier = document.getElementById("mijnFormulier");
 
 if (mijnFormulier) {
