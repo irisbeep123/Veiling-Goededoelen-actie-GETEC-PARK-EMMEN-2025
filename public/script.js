@@ -1,5 +1,3 @@
-
-
 const items = [
   { id: "item1", title: "Fiets", image: "https://picsum.photos/seed/fiets/300/200" },
   { id: "item2", title: "Laptop", image: "https://picsum.photos/seed/laptop/300/200" },
@@ -11,7 +9,6 @@ const items = [
   { id: "item8", title: "Tablet", image: "https://picsum.photos/seed/tablet/300/200" },
   { id: "item9", title: "Printer", image: "https://picsum.photos/seed/printer/300/200" }
 ];
-
 
 async function fetchBids() {
   const res = await fetch("/api/bids");
@@ -52,13 +49,16 @@ async function submitBid(itemId) {
 
   const res = await fetch("/api/bid", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({ itemId, amount, name, email })
   });
 
   const data = await res.json();
   document.getElementById(`status-${itemId}`).innerText = data.message;
-  renderItems();
+
+  renderItems(); // update de lijst
 }
 
-renderItems();
+renderItems(); // laadt de items bij opstart

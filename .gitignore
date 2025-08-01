@@ -3,8 +3,3 @@ node_modules/
 .env
 .DS_Store
 *.log
-
-# Andere mogelijke bestanden
-npm-debug.log*
-.env.local
-.env.*.local
